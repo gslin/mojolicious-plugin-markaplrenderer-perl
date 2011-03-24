@@ -47,8 +47,6 @@ This is L<Markapl> for L<Mojolicious>.
 
 use Mojo::Base 'Mojolicious::Plugin';
 
-use Encode;
-
 sub register {
     my ($self, $app, $conf) = @_;
 
@@ -62,7 +60,7 @@ sub register {
 	$name => sub {
 	    my ($r, $c, $output, $options) = @_;
 
-	    $$output = Encode::decode('utf8', $view_class->render($options->{template}, $c->{stash}));
+	    $$output = $view_class->render($options->{template}, $c->{stash});
 
 	    return 1;
 	}
