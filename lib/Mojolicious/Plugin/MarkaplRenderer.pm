@@ -16,10 +16,10 @@ This is L<Markapl> for L<Mojolicious>.
 
     # In app
     sub startup {
-	my $self = shift;
+        my $self = shift;
 
-	$self->plugins->register_plugin('Mojolicious::Plugin::MarkaplRenderer', $self, view_class => 'MyProject::View');
-	$self->renderer->default_handler('markapl');
+        $self->plugins->register_plugin('Mojolicious::Plugin::MarkaplRenderer', $self, view_class => 'MyProject::View');
+        $self->renderer->default_handler('markapl');
     }
 
     # Then in MyProject::View
@@ -27,18 +27,18 @@ This is L<Markapl> for L<Mojolicious>.
     use Markapl;
 
     template 'index/index' => sub {
-	html {
-	    head {
-		meta(charset => 'UTF-8');
-		title { 'I am title' };
-	    }
+        html {
+            head {
+                meta(charset => 'UTF-8');
+                title { 'I am title' };
+            }
 
-	    body {
-		p { 'testing paragraph...' };
+            body {
+                p { 'testing paragraph...' };
 
-		# ...
-	    }
-	};
+                # ...
+            }
+        };
     };
 
     1;
@@ -57,13 +57,13 @@ sub register {
     eval "require $view_class;";
 
     $app->renderer->add_handler(
-	$name => sub {
-	    my ($r, $c, $output, $options) = @_;
+        $name => sub {
+            my ($r, $c, $output, $options) = @_;
 
-	    $$output = $view_class->render($options->{template}, $c->{stash});
+            $$output = $view_class->render($options->{template}, $c->{stash});
 
-	    return 1;
-	}
+            return 1;
+        }
     );
 }
 
